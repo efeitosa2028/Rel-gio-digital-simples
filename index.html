@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio Digital</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e1e2f, #3a3a55);
+      color: #fff;
+      flex-direction: column;
+    }
+
+    .clock {
+      font-size: 4rem;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    .day {
+      font-size: 1.2rem;
+      margin-top: 5px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock" id="clock">00:00:00</div>
+  <div class="date" id="date">00/00/0000</div>
+  <div class="day" id="day">Segunda-feira</div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+
+      const daysOfWeek = [
+        'Domingo', 'Segunda-feira', 'Terça-feira', 
+        'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
+      ];
+
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('date').textContent = `${day}/${month}/${year}`;
+      document.getElementById('day').textContent = daysOfWeek[now.getDay()];
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // atualiza imediatamente ao carregar
+  </script>
+</body>
+</html>
